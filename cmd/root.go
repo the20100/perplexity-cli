@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/vincentmaurin/perplexity-cli/client"
+	"github.com/the20100/perplexity-cli/client"
 )
 
 var apiKey string

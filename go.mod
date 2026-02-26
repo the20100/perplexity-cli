@@ -1,4 +1,4 @@
-module github.com/vincentmaurin/perplexity-cli
+module github.com/the20100/perplexity-cli
 
 go 1.23
 

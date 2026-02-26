@@ -5,7 +5,7 @@ A Go CLI for the [Perplexity AI API](https://docs.perplexity.ai) — web search,
 ## Install
 
 ```bash
-git clone https://github.com/vincentmaurin/perplexity-cli
+git clone https://github.com/the20100/perplexity-cli
 cd perplexity-cli
 go build -o perplexity .
 # optionally move to PATH

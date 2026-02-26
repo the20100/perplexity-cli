@@ -1,6 +1,6 @@
 package main
 
-import "github.com/vincentmaurin/perplexity-cli/cmd"
+import "github.com/the20100/perplexity-cli/cmd"
 
 func main() {
 	cmd.Execute()
