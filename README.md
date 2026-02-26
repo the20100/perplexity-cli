@@ -159,6 +159,20 @@ perplexity content --json https://example.com | jq '.results[0].content'
 
 ---
 
+---
+
+### `update` — Self-update
+
+Pull the latest source from GitHub, rebuild, and replace the current binary.
+
+```bash
+perplexity update
+```
+
+Requires `git` and `go` to be installed.
+
+---
+
 ## Models
 
 | Model | Description |
@@ -177,7 +191,8 @@ perplexity-cli/
 │   ├── root.go          # Root command, shared helpers (newClient, printJSON)
 │   ├── search.go        # search command
 │   ├── chat.go          # chat command — streaming + interactive mode
-│   └── content.go       # content command
+│   ├── content.go       # content command
+│   └── update.go        # self-update
 └── client/
     ├── client.go        # HTTP client (Search, ChatComplete, ChatStream, GetContent)
     └── types.go         # All request / response types
