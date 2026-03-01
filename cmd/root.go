@@ -19,7 +19,8 @@ var rootCmd = &cobra.Command{
 Supports web search, AI chat with web grounding, and URL content extraction.
 
 Configuration:
-  Set your API key via the PERPLEXITY_API_KEY environment variable,
+  Set your API key via the PERPLEXITY_API_KEY environment variable (or aliases:
+  PERPLEXITY_KEY, PERPLEXITY_API, API_KEY_PERPLEXITY, ...),
   or pass it with --api-key.`,
 }
 
@@ -33,10 +34,23 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&apiKey, "api-key", "", "Perplexity API key (or set PERPLEXITY_API_KEY)")
 }
 
+// resolveEnv returns the value of the first non-empty environment variable from the given names.
+func resolveEnv(names ...string) string {
+	for _, name := range names {
+		if v := os.Getenv(name); v != "" {
+			return v
+		}
+	}
+	return ""
+}
+
 func newClient() *client.Client {
 	key := apiKey
 	if key == "" {
-		key = os.Getenv("PERPLEXITY_API_KEY")
+		key = resolveEnv(
+			"PERPLEXITY_API_KEY", "PERPLEXITY_KEY", "PERPLEXITY_API", "API_KEY_PERPLEXITY", "API_PERPLEXITY", "PERPLEXITY_PK", "PERPLEXITY_PUBLIC",
+			"PERPLEXITY_API_SECRET", "PERPLEXITY_SECRET_KEY", "PERPLEXITY_API_SECRET_KEY", "PERPLEXITY_SECRET", "SECRET_PERPLEXITY", "API_SECRET_PERPLEXITY", "SK_PERPLEXITY", "PERPLEXITY_SK",
+		)
 	}
 	if key == "" {
 		fmt.Fprintln(os.Stderr, "error: API key required. Set PERPLEXITY_API_KEY or use --api-key")
